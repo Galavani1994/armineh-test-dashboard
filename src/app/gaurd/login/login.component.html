@@ -1,0 +1,59 @@
+<div style="display:flex;justify-content:center;align-items: center">
+  <div style="height: 300px;width: 450px;margin-top: 5%;border-radius: 5px">
+    <div *ngIf="!isRegister">
+      <mat-card>
+        <mat-card-title>ورود</mat-card-title>
+        <div style="padding: 20px">
+          <mat-divider></mat-divider>
+        </div>
+        <mat-card-content>
+          <form>
+            <div style="margin-top: 10px">
+              <mat-label class="label-space" style="margin-bottom: 5px">نام کاربری</mat-label>
+              <input type="text" class="form-control" name="username" [(ngModel)]="username">
+            </div>
+
+            <div style="margin-top: 10px">
+              <mat-label class="label-space" style="margin-bottom: 5px">رمز عبور</mat-label>
+              <input type="text" class="form-control" name="password" [(ngModel)]="password">
+            </div>
+          </form>
+        </mat-card-content>
+        <mat-card-actions class="button">
+          <button mat-button color="primary" (click)="toggleForm()">ثبت نام</button>
+          <button mat-button color="primary" (click)="login()">ورود</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <!--REGISTER FORM-->
+    <div *ngIf="isRegister">
+      <mat-card>
+        <mat-card-title>ثبت نام</mat-card-title>
+        <div style="padding: 20px">
+          <mat-divider></mat-divider>
+        </div>
+        <mat-card-content>
+          <form>
+            <div style="margin-top: 10px">
+              <mat-label class="label-space" style="margin-bottom: 5px">نام کاربری</mat-label>
+              <input type="text" class="form-control">
+            </div>
+
+            <div style="margin-top: 10px">
+              <mat-label class="label-space" style="margin-bottom: 5px">رمز عبور</mat-label>
+              <input type="text" class="form-control">
+            </div>
+            <div style="margin-top: 10px">
+              <mat-label class="label-space" style="margin-bottom: 5px">تکرار رمز عبور</mat-label>
+              <input type="text" class="form-control">
+            </div>
+          </form>
+        </mat-card-content>
+        <mat-card-actions class="button">
+          <button mat-button color="primary" (click)="toggleForm()">بازگشت</button>
+          <button mat-button color="primary">ثبت نام</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

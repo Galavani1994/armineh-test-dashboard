@@ -1,0 +1,120 @@
+<div *ngIf="insertMode" dir="rtl">
+      <form dir="rtl" #baseInfoForm=ngForm>
+        <div class="card">
+          <div class="card-body">
+            <div class="card-header">
+              <span>ثبت کاربر</span>
+            </div>
+            <div class="row">
+              <div class="form-group row col-md-6" style="padding: 10px">
+                <label class="col-md-4 col-form-label">نام کاربری</label>
+                <div class="col-md-8">
+                  <input type="text" class="form-control" required name="topic" [(ngModel)]="entity.topic">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button mat-raised-button color="primary" style="margin-left: 15px" (click)="save()"
+                    [disabled]="baseInfoForm.form.invalid">
+              {{'save'}}
+            </button>
+            <button mat-raised-button color="accent" (click)="cancel()">
+              {{'cancel'}}
+            </button>
+
+          </div>
+        </div>
+      </form>
+
+</div>
+<div *ngIf="!insertMode">
+  <div class="card">
+    <div class="card-header" dir="rtl">
+      <div class="row">
+        <div class="col-md-2" style="padding-top: 10px">
+          <span>لیست کاربران</span>
+        </div>
+        <div class="col-md-10" style="text-align: left">
+          <button mat-button color="primary" matTooltip="{{'newRecord'}}" (click)="edit(null)">
+            <mat-icon>add</mat-icon>
+          </button>
+          <button mat-button color="primary" matTooltip="{{'search'}}" (click)="toggleSearch()">
+            <mat-icon>search</mat-icon>
+          </button>
+          <button mat-button color="primary" matTooltip="{{'refresh'}}" (click)="clearFilter()">
+            <mat-icon>refresh</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <!-- search section -->
+      <div class="row" *ngIf="searchMode" style="padding-top: 15px">
+        <div class="card">
+          <div class="card-body">
+            <form>
+              <div class="row">
+                <div class="form-group row col-md-5" style="padding: 10px">
+                  <label class="col-md-4 col-form-label">نام کاربری</label>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control" name="topic" [(ngModel)]="filter.topic">
+                  </div>
+                </div>
+                <div class="col-md-2" style="text-align: left;padding-top: 10px">
+                  <button mat-raised-button color="primary" (click)="loadAll()">
+                    {{'search'}}
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body" dir="rtl">
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+
+          <ng-container matColumnDef="rowIndex">
+            <th fxFlex="10%" fxLayoutAlign="center center" mat-header-cell *matHeaderCellDef>
+              ردیف
+            </th>
+            <td fxFlex="10%" fxLayoutAlign="center center" mat-cell *matCellDef="let i = index">
+              <span>{{i + 1}}</span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="topic">
+            <th mat-header-cell *matHeaderCellDef> نام کاربری</th>
+            <td mat-cell *matCellDef="let element"> {{element.topic}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="operating">
+            <th fxFlex="20%" fxLayoutAlign="center center" mat-header-cell *matHeaderCellDef>عملیات</th>
+            <td fxFlex="20%" fxLayoutAlign="center center" mat-cell *matCellDef="let element">
+              <button mat-icon-button style="cursor: pointer !important;" color="primary" (click)="edit(element)">
+                <i class="material-icons btn-edit btn-hover">edit</i>
+              </button>
+              <button mat-icon-button style="cursor: pointer !important;" color="accent" (click)="delete(element.id)">
+                <i class="material-icons btn-delete btn-hover" style="font-size: 18px">delete</i>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns" style="text-align: right"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" style="text-align: right"
+              (dblclick)="edit(row)"></tr>
+        </table>
+        <mat-paginator #paginator
+                       [length]="totalElements"
+                       [pageSize]="10"
+                       [pageSizeOptions]="[5, 10, 25, 100]"
+                       (page)="pageEvent = reloadGrid($event)"
+                       aria-label="Select page" fxLayoutAlign="center">
+        </mat-paginator>
+      </div>
+    </div>
+    <div class="card-footer"></div>
+  </div>
+
+</div>

@@ -1,0 +1,39 @@
+<mat-toolbar  dir="rtl" class="app-toolbar" style="height: 50px">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span id="kk">{{'siteTitle'}}</span>
+  <section style="margin-right: 50px">
+    <button mat-button color="primary" matTooltip="{{'home'}}" routerLink="/home">
+      <mat-icon>home</mat-icon>
+    </button>
+    <button mat-button color="primary" matTooltip="{{'about'}}">
+      <mat-icon>info</mat-icon>
+    </button>
+    <button mat-button color="primary" matTooltip="{{'call us'}}">
+      <mat-icon>call</mat-icon>
+    </button>
+  </section>
+  <span class="example-spacer"></span>
+  <button  style="margin-left: 20px" mat-icon-button class="example-icon favorite-icon" routerLink="/cart">
+    <div style="font-size: 10px" class="badge bg-danger">{{totalItem}}</div>
+    <mat-icon>shopping_cart</mat-icon>
+  </button>
+  <div style="margin-left: 20px">
+    <!--<select class="form-control" #selectedLanguage (change)="switchLanguage(selectedLanguage.value)" matTooltip="{{'language toolTip'|translate}}">
+      <option *ngFor="let item of translate.getLangs()" [value]="item" [selected]="item===translate.currentLang">{{item}}</option>
+    </select>-->
+  </div>
+  <button mat-icon-button class="example-icon favorite-icon" routerLink="/dashboard/panel">
+    <mat-icon>person</mat-icon>
+  </button>
+  <div style="margin-left: 20px" *ngIf="display_logout">
+    <span style="font-size: small;margin-left: 10px">سلام ! {{userInfo.username}}</span>
+    <button style="font-size: small" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="logout()"  matTooltip="{{'logout'}}">
+      <mat-icon>input</mat-icon>
+    </button>
+
+  </div>
+
+</mat-toolbar>
+
